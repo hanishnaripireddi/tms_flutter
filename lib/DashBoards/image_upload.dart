@@ -156,6 +156,7 @@ class _UploadImageState extends State<UploadImage> {
                 GestureDetector(
                     onTap: (){
                       uploadImage();
+                      image==null;
                     },
                     child: Center(
                         child: Container(

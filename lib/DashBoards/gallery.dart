@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class User {
   final String imageKey, imageName;
@@ -72,43 +73,57 @@ class _ImageGalleryState extends State<ImageGallery> {
         child: Padding(
           padding: const EdgeInsets.only(left: 10.0, top: 10, right: 10.0),
           child:
-          Container(
+          ListView.builder(
+              itemCount: _users.length,
+              itemBuilder: (context, index) {
+                User user = _users[index];
+                if (_users == null) {
+                  return Container(
 
-            child: ListView.builder(
-                itemCount: _users.length,
-                itemBuilder: (context, index) {
-                  User user = _users[index];
-                  if (_users == null) {
-                    return Container(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                } else {
+                  return ListTile(
+                    title: Column(
+                      children: [
+                        Container(
+                          width: 400,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.blue),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Column(children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: GestureDetector(
+                                onTap: () async{
+                                  var url = 'https://ticketeasy.tk/api/images/${user.imageKey}';
+                                  if (await canLaunch(url)) {
+                                  await launch(
+                                  url,
+                                  forceSafariVC: false,
+                                  );
+                                  }
 
-                      child: Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    );
-                  } else {
-                    return ListTile(
-                      title: Column(
-                        children: [
-                          Container(
-                            width: 400,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              border: Border.all(color: Colors.blue),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Column(children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(user.imageName,
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: Colors.blue)),
-                              ),]),),
-                        ],
-                      ),
-                    );
-                  }
-                }),
-          ),
+                                },
+                                child: Column(
+                                  children: [
+                                    Text(user.imageName,
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: Colors.blue)),
+                                    Image.network('https://ticketeasy.tk/api/images/${user.imageKey}')
+                                  ],
+                                ),
+                              ),
+                            ),]),),
+                      ],
+                    ),
+                  );
+                }
+              }),
 
 
         ),
