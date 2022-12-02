@@ -68,6 +68,8 @@ class _ImageGalleryState extends State<ImageGallery> {
   Widget build(BuildContext context) {
     return  Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.blueGrey,
+        title: const Text('Image Gallery'),
       ),
       body: Container(
         child: Padding(
@@ -92,7 +94,7 @@ class _ImageGalleryState extends State<ImageGallery> {
                           width: 400,
                           decoration: BoxDecoration(
                             color: Colors.white,
-                            border: Border.all(color: Colors.blue),
+
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Column(children: [
@@ -113,7 +115,7 @@ class _ImageGalleryState extends State<ImageGallery> {
                                   children: [
                                     Text(user.imageName,
                                         textAlign: TextAlign.left,
-                                        style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: Colors.blue)),
+                                        style: TextStyle(fontSize: 16,fontWeight: FontWeight.w400,color: Colors.blueGrey)),
                                     Image.network('https://ticketeasy.tk/api/images/${user.imageKey}')
                                   ],
                                 ),

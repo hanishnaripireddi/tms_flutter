@@ -68,16 +68,18 @@ class _TicketsPageState extends State<TicketsPage> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(left: 10.0, top: 10, right: 10.0),
-        child: 
+        child:
             Container(
-              
+              decoration: BoxDecoration(
+                color: Colors.white38,
+              ),
               child: ListView.builder(
                   itemCount: _users.length,
                   itemBuilder: (context, index) {
                     User user = _users[index];
                     if (_users == null) {
                       return Container(
-                  
+
                         child: Center(
                           child: CircularProgressIndicator(),
                         ),
@@ -86,28 +88,65 @@ class _TicketsPageState extends State<TicketsPage> {
                       return ListTile(
                         title: Column(
                           children: [
+
                             Container(
                               width: 400,
                               decoration: BoxDecoration(
-                                color: Colors.white,
-                                border: Border.all(color: Colors.blue),
+                                color: Colors.blueGrey,
+                                border: Border.all(color: Color.fromRGBO(73, 113, 116, 1)),
                                 borderRadius: BorderRadius.circular(12),
                               ),
                               child: Column(children: [
                                 Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(user.organization,
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(fontSize: 20,fontWeight: FontWeight.w600,color: Colors.blue)),
-                                ),Text(user.category),Text(user.query),Text(user.status,)]),),
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(user.organization,
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(fontSize: 24,fontWeight: FontWeight.w400,color: Colors.white)),
+                                    ),
+                                Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Container(
+                                    width: 300,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      color: Colors.white,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        children: [
+                                          Text(user.status,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.green,
+                                          ),),
+
+                                          Text(user.category,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.grey
+                                          ),),
+                                          Text(user.query,
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                          ),),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+
+
+                              ]),),
                           ],
                         ),
                       );
                     }
                   }),
             ),
-          
-        
+
+
       ),
     );
   }

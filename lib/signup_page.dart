@@ -48,10 +48,14 @@ class _SignUpPageState extends State<SignUpPage> {
         final data = await json.decode(res.body) as Map;
         print(data);
         if (data["status"]=="ok") {
+          SnackBar mysnackbar = SnackBar(content: Text('User Registered'));
+          ScaffoldMessenger.of(context).showSnackBar(mysnackbar);
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => LoginPage()));
         }else{
           print("isuue with cred");
+          SnackBar mysnackbar = SnackBar(content: Text('Check all fields'));
+          ScaffoldMessenger.of(context).showSnackBar(mysnackbar);
         }
         
       }
@@ -84,11 +88,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                     
                     Text(
-                      "Sign Up",
+                      "SIGN UP",
                       style: TextStyle(
                         fontSize: 26,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.deepPurpleAccent,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.blueGrey,
                       ),
                     ),
                     SizedBox(
@@ -101,7 +105,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(25),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -123,7 +127,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               hintText: "UserName",
                               prefixIcon: Icon(
                                 Icons.person,
-                                color: Colors.deepPurple,
+                                color: Colors.grey,
                               ),
                             ),
                           ),
@@ -141,7 +145,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(25),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -168,7 +172,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               hintText: "Email",
                               prefixIcon: Icon(
                                 Icons.email,
-                                color: Colors.deepPurple,
+                                color: Colors.grey,
                               ),
                             ),
                           ),
@@ -186,7 +190,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(25),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -207,8 +211,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               border: InputBorder.none,
                               hintText: "Mobile Number",
                               prefixIcon: Icon(
-                                Icons.call,
-                                color: Colors.deepPurple,
+                                Icons.phone_android,
+                                color: Colors.grey,
                               ),
                             ),
                           ),
@@ -226,7 +230,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(25),
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -248,8 +252,8 @@ class _SignUpPageState extends State<SignUpPage> {
                               border: InputBorder.none,
                               hintText: "Password",
                               prefixIcon: Icon(
-                                Icons.password,
-                                color: Colors.deepPurple,
+                                Icons.vpn_key,
+                                color: Colors.grey,
                               ),
                             ),
                           ),
@@ -307,11 +311,11 @@ class _SignUpPageState extends State<SignUpPage> {
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                Colors.deepPurple,
-                                Colors.blue,
+                                Colors.blueGrey,
+                                Colors.grey,
                               ],
                             ),
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(25),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
@@ -320,8 +324,8 @@ class _SignUpPageState extends State<SignUpPage> {
                                 'Sign Up',
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400),
                               ),
                             ),
                           ),
@@ -336,7 +340,12 @@ class _SignUpPageState extends State<SignUpPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Already a member? "),
+                        Text("Already a member? ",
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
+                        ),),
+                        SizedBox(width: 10,),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -347,8 +356,9 @@ class _SignUpPageState extends State<SignUpPage> {
                           child: Text(
                             "Get back Now",
                             style: TextStyle(
-                              color: Colors.deepPurple,
-                              fontWeight: FontWeight.bold,
+                              color: Colors.blueGrey,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16,
                             ),
                           ),
                         )

@@ -10,6 +10,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'CustomerDashboard.dart';
 import 'gallery.dart';
 
 
@@ -79,9 +80,17 @@ class _UploadImageState extends State<UploadImage> {
       print(res);
 
       print('image uploaded');
+      SnackBar mysnackbar = SnackBar(content: Text('Image submitted'));
+      ScaffoldMessenger.of(context).showSnackBar(mysnackbar);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => CustomerDashboard()));
     } else {
 
       print("not uploaded");
+      SnackBar mysnackbar = SnackBar(content: Text('Server issue,please try again'));
+      ScaffoldMessenger.of(context).showSnackBar(mysnackbar);
     }
   }
 
@@ -90,7 +99,7 @@ class _UploadImageState extends State<UploadImage> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
-        color: Color.fromRGBO(255, 255, 255, 1.0),
+        color: Colors.blueGrey[100],
 
         borderRadius: BorderRadius.circular(12),
       ),
@@ -104,7 +113,7 @@ class _UploadImageState extends State<UploadImage> {
                 height: 120,
                 margin: EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(172, 210, 246, 0.3),
+                  color: Color.fromRGBO(255, 255, 255, 1.0),
                   border: Border.all(color: Color.fromRGBO(57, 157, 248, 0.8)),
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -179,7 +188,22 @@ class _UploadImageState extends State<UploadImage> {
             TextButton(onPressed: (){
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => ImageGallery()));
-            }, child: Text('Image Gallery')),
+            }, child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('Image Gallery',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w400,
+                  color: Colors.blueGrey,
+                ),),
+              ),
+            )),
 
 
 

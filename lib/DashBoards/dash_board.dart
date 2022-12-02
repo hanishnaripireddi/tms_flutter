@@ -19,17 +19,18 @@ class _DashBoardState extends State<DashBoard> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
+      backgroundColor: Colors.white38,
       body: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             Center(
                 child: Text(
               'Dashboard',
               style: TextStyle(
-                  fontSize: 22, fontWeight: FontWeight.w700, color: Colors.grey),
+                  fontSize: 26, fontWeight: FontWeight.w400, color: Colors.blueGrey),
             )),
             SizedBox(
               height: 20,

@@ -43,6 +43,8 @@ class _LoginPageState extends State<LoginPage> {
           // final prefs = await SharedPreferences.getInstance();
           // print(data["username"]);
           // final myString = prefs.setString('__key', data["username"]);
+          SnackBar mysnackbar = SnackBar(content: Text('Logging In ...'));
+          ScaffoldMessenger.of(context).showSnackBar(mysnackbar);
 
           await userdata.write('key_username', data["username"]);
           await userdata.write('key_logStatus', true);
@@ -51,9 +53,13 @@ class _LoginPageState extends State<LoginPage> {
           //     MaterialPageRoute(builder: (context) => CustomerDashboard()));
         } else {
           print("No user found");
+          SnackBar mysnackbar = SnackBar(content: Text('check credentials'));
+          ScaffoldMessenger.of(context).showSnackBar(mysnackbar);
         }
       } else {
         print("failed");
+        SnackBar mysnackbar = SnackBar(content: Text('fill all fields'));
+        ScaffoldMessenger.of(context).showSnackBar(mysnackbar);
       }
     } catch (e) {
       print(e.toString());
@@ -82,11 +88,11 @@ class _LoginPageState extends State<LoginPage> {
                       height: 20,
                     ),
                     Text(
-                      "Log In",
+                      "LOG IN",
                       style: TextStyle(
                         fontSize: 26,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.deepPurple,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.blueGrey,
                       ),
                     ),
                     SizedBox(
@@ -98,10 +104,10 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(25),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: TextFormField(
                             controller: TextEditingController(
                               text: user.email,
@@ -123,7 +129,7 @@ class _LoginPageState extends State<LoginPage> {
                             decoration: InputDecoration(
                                 prefixIcon: Icon(
                                   Icons.email_sharp,
-                                  color: Colors.deepPurple,
+                                  color: Colors.grey,
                                 ),
                                 border: InputBorder.none,
                                 hintText: "Email"),
@@ -140,10 +146,10 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(color: Colors.white),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(25),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
                           child: TextFormField(
                             controller: TextEditingController(
                               text: user.password,
@@ -160,8 +166,8 @@ class _LoginPageState extends State<LoginPage> {
                             obscureText: true,
                             decoration: InputDecoration(
                                 prefixIcon: Icon(
-                                  Icons.password_outlined,
-                                  color: Colors.deepPurple,
+                                  Icons.vpn_key,
+                                  color: Colors.grey,
                                 ),
                                 border: InputBorder.none,
                                 hintText: "Password"),
@@ -200,46 +206,48 @@ class _LoginPageState extends State<LoginPage> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 25),
                         child: Container(
+
                           decoration: BoxDecoration(
                             gradient: LinearGradient(
                               begin: Alignment.topLeft,
                               end: Alignment.bottomRight,
                               colors: [
-                                Colors.deepPurple,
-                                Colors.blue,
+                                Colors.grey,
+                                Colors.blueGrey,
                               ],
                             ),
-                            borderRadius: BorderRadius.circular(12),
+                            borderRadius: BorderRadius.circular(25),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
                             child: Center(
+
                               child: Text(
                                 'Log In',
                                 style: TextStyle(
                                     color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w400),
                               ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      "forgot password?",
-                      style: TextStyle(color: Colors.grey),
-                    ),
+
                     SizedBox(
                       height: 20,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Not a member? "),
+                        Text("Not a member? ",
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        SizedBox(width: 10,),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -250,8 +258,9 @@ class _LoginPageState extends State<LoginPage> {
                           child: Text(
                             "Regester Now",
                             style: TextStyle(
-                              color: Colors.deepPurple,
-                              fontWeight: FontWeight.bold,
+                              color: Colors.blueGrey,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16,
                             ),
                           ),
                         ),

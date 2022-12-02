@@ -34,11 +34,12 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
       body: SafeArea(child: screens[index]),
       bottomNavigationBar: NavigationBarTheme(
         data: NavigationBarThemeData(
-          indicatorColor: Color.fromARGB(255, 159, 196, 231),
+          indicatorColor: Colors.grey[100],
+          backgroundColor: Colors.white54,
           labelTextStyle: MaterialStateProperty.all(TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w500,
-              color: Color.fromARGB(255, 92, 92, 92))),
+              color: Color.fromARGB(255, 100, 126, 166))),
         ),
         child: NavigationBar(
             height: 70,
@@ -48,17 +49,26 @@ class _CustomerDashboardState extends State<CustomerDashboard> {
                 setState(() => this.index = index),
             destinations: [
               NavigationDestination(
-                  icon: Icon(Icons.dashboard_outlined),
-                  selectedIcon: Icon(Icons.dashboard),
-                  label: 'dashboard'),
+                  icon: Icon(Icons.dashboard_outlined,
+                  color: Colors.grey[400],),
+                  selectedIcon: Icon(Icons.dashboard,
+                  color: Colors.blueGrey,
+                  size: 30,),
+                  label: 'Dashboard'),
               NavigationDestination(
-                  icon: Icon(Icons.receipt_outlined),
-                  selectedIcon: Icon(Icons.receipt),
-                  label: 'tickets'),
+                  icon: Icon(Icons.receipt_outlined,
+                    color: Colors.grey[400],),
+                  selectedIcon: Icon(Icons.receipt,
+                    color: Colors.blueGrey,
+                    size: 30,),
+                  label: 'Tickets'),
               NavigationDestination(
-                  icon: Icon(Icons.person_outlined),
-                  selectedIcon: Icon(Icons.person),
-                  label: 'profile'),
+                  icon: Icon(Icons.person_outlined,
+                    color: Colors.grey[400],),
+                  selectedIcon: Icon(Icons.person,
+                    color: Colors.blueGrey,
+                    size: 30,),
+                  label: 'Profile'),
             ]),
       ),
     );
@@ -103,10 +113,10 @@ class _TicketFormState extends State<TicketForm> {
       Map<String, String> customHeaders = {"content-type": "application/json"};
 
       var username = userdata.read('key_username');
-
-      if(category.isEmpty){
-        category = 'Technical';
+      if(user.category==''){
+        user.category='Technical';
       }
+
 
       final res = await http.post(
           Uri.parse("https://ticketeasy.tk/api/v1/addNewTicket"),
@@ -124,8 +134,16 @@ class _TicketFormState extends State<TicketForm> {
         print(data);
         if (data["status"]=="ok") {
           print("ticket submitted");
+          SnackBar mysnackbar = SnackBar(content: Text('Ticket Submitted'));
+          ScaffoldMessenger.of(context).showSnackBar(mysnackbar);
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => CustomerDashboard()));
         }else{
           print("isuue with cred");
+          SnackBar mysnackbar = SnackBar(content: Text('submit all fields'));
+          ScaffoldMessenger.of(context).showSnackBar(mysnackbar);
         }
 
       }
@@ -148,19 +166,19 @@ class _TicketFormState extends State<TicketForm> {
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.blueGrey[100],
           borderRadius: BorderRadius.circular(12),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
               Text(
                 "Create a new ticket",
                 style: TextStyle(
-                    color: Colors.grey,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 20),
+                    color: Colors.blueGrey,
+                    fontWeight: FontWeight.w400,
+                    fontSize: 24),
               ),
               SizedBox(
                 height: 20,
@@ -175,16 +193,18 @@ class _TicketFormState extends State<TicketForm> {
                       value: items,
                       child: Text(
                         items,
-                        style: TextStyle(color: Colors.blue),
+                        style: TextStyle(color: Colors.blueGrey),
                       ),
                     );
                   }).toList(),
                   onChanged: (String? newValue) {
+
                     setState(() {
                       dropdownvalue = newValue!;
 
                     });
                     user.category=newValue!;
+
                   },
                 ),
               ),
@@ -196,7 +216,7 @@ class _TicketFormState extends State<TicketForm> {
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    border: Border.all(color: Colors.blue),
+                    border: Border.all(color: Colors.blueGrey),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Padding(
@@ -210,7 +230,8 @@ class _TicketFormState extends State<TicketForm> {
                       },
                       validator: (value){
                         if (value?.isEmpty ?? true) {
-                          return 'Enter username';
+                          return 'empty';
+
                         }
                         return null;
                       },
@@ -221,12 +242,27 @@ class _TicketFormState extends State<TicketForm> {
                 ),
               ),
               SizedBox(height: 10,),
-              ElevatedButton(onPressed: (){
-                print(organization);
-                print(user.category);
-                print(user.query);
+              TextButton(onPressed: (){
                 raiseTicket(user.category,user.query);
-              }, child: Text('Submit ticket'))
+
+              }, child: Container(
+
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey,
+                  borderRadius: BorderRadius.circular(12),
+
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('Submit ticket',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white,
+                  ),),
+                ),
+              )),
+
             ],
           ),
         ),
