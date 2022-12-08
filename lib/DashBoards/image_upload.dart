@@ -96,121 +96,123 @@ class _UploadImageState extends State<UploadImage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      decoration: BoxDecoration(
-        color: Colors.blueGrey[100],
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 10),
+        decoration: BoxDecoration(
+          color: Colors.blueGrey[100],
 
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-          children: [
-            GestureDetector(
-              onTap: () {
-                getImage();
-              },
-              child: Container(
-                height: 120,
-                margin: EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  color: Color.fromRGBO(255, 255, 255, 1.0),
-                  border: Border.all(color: Color.fromRGBO(57, 157, 248, 0.8)),
-                  borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        child: Column(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  getImage();
+                },
+                child: Container(
+                  height: 120,
+                  margin: EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    color: Color.fromRGBO(255, 255, 255, 1.0),
+                    border: Border.all(color: Color.fromRGBO(57, 157, 248, 0.8)),
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: image == null
+                      ? Center(
+                          child: Text("Pick from gallery",
+                          style: TextStyle(
+                              color:Color.fromRGBO(57, 157, 248, 0.8),
+                          ),),
+                        )
+                      : Container(
+                          child: Center(
+                              child: Image.file(
+                          File(image!.path).absolute,
+                          height: 100,
+                          width: 100,
+                          fit: BoxFit.cover,
+                        ))),
                 ),
-                child: image == null
-                    ? Center(
-                        child: Text("Pick from gallery",
-                        style: TextStyle(
-                            color:Color.fromRGBO(57, 157, 248, 0.8),
-                        ),),
-                      )
-                    : Container(
-                        child: Center(
-                            child: Image.file(
-                        File(image!.path).absolute,
-                        height: 100,
-                        width: 100,
-                        fit: BoxFit.cover,
-                      ))),
               ),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                    onTap: (){
-                      cameraImage();
-                    },
-                    child: Center(
-                        child: Container(
-                            margin: EdgeInsets.all(10),
-                            padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                            decoration: BoxDecoration(
-                              color: Color.fromRGBO(86, 86, 86, 1.0),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-
-                            child: Text("Camera",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Color.fromRGBO(255, 255, 255, 1),
-
-                              ),)))),
-                SizedBox(width: 20,),
-
-                GestureDetector(
-                    onTap: (){
-                      uploadImage();
-                      image==null;
-                    },
-                    child: Center(
-                        child: Container(
-                            margin: EdgeInsets.all(10),
-                            padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                            decoration: BoxDecoration(
-                              color: Color.fromRGBO(68, 127, 217, 1.0),
-                              borderRadius: BorderRadius.circular(5),
-                            ),
-
-                            child: Text("Upload",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                color: Color.fromRGBO(255, 255, 255, 1),
-                              ),)))),
-
-              ],
-            ),
-
-            TextButton(onPressed: (){
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ImageGallery()));
-            }, child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-
+              SizedBox(
+                height: 10,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text('Image Gallery',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.blueGrey,
-                ),),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                      onTap: (){
+                        cameraImage();
+                      },
+                      child: Center(
+                          child: Container(
+                              margin: EdgeInsets.all(10),
+                              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                              decoration: BoxDecoration(
+                                color: Color.fromRGBO(86, 86, 86, 1.0),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+
+                              child: Text("Camera",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Color.fromRGBO(255, 255, 255, 1),
+
+                                ),)))),
+                  SizedBox(width: 20,),
+
+                  GestureDetector(
+                      onTap: (){
+                        uploadImage();
+                        image==null;
+                      },
+                      child: Center(
+                          child: Container(
+                              margin: EdgeInsets.all(10),
+                              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                              decoration: BoxDecoration(
+                                color: Color.fromRGBO(68, 127, 217, 1.0),
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+
+                              child: Text("Upload",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  color: Color.fromRGBO(255, 255, 255, 1),
+                                ),)))),
+
+                ],
               ),
-            )),
+
+              TextButton(onPressed: (){
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ImageGallery()));
+              }, child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('Image Gallery',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.blueGrey,
+                  ),),
+                ),
+              )),
 
 
 
 
 
-          ],
+            ],
 
+        ),
       ),
     );
   }
